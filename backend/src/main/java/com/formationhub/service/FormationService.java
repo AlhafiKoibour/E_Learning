@@ -167,15 +167,7 @@ public class FormationService {
                 .durationHours(module.getDurationHours())
                 .formationId(module.getFormation() != null ? module.getFormation().getId() : null)
                 .createdAt(module.getCreatedAt())
-                .lessons(module.getLessons() != null ? module.getLessons().stream()
-                        .map(lesson -> LessonDTO.builder()
-                                .id(lesson.getId())
-                                .title(lesson.getTitle())
-                                .description(lesson.getDescription())
-                                .orderIndex(lesson.getOrderIndex())
-                                .duration(lesson.getDurationMinutes())
-                                .build())
-                        .collect(Collectors.toList()) : Collections.emptyList())
+                .lessons(Collections.emptyList())
                 .build();
     }
 

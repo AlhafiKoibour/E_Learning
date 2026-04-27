@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -49,5 +50,35 @@ public class UserController {
     @Operation(summary = "Progression de formation", description = "Récupérer la progression pour une formation")
     public ResponseEntity<Integer> getProgress(@PathVariable Long formationId) {
         return ResponseEntity.ok(userService.getProgress(formationId));
+    }
+
+    // Admin endpoints
+    @GetMapping("/admin")
+    @PreAuthorize("hasRole('ADMIN')")
+    @Operation(summary = "Lister tous les utilisateurs", description = "Récupérer tous les utilisateurs (Admin seulement)")
+    public ResponseEntity<List<UserDTO>> getAllUsers() {
+        return ResponseEntity.ok(userService.getAllUsers());
+    }
+
+    @GetMapping("/admin/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    @Operation(summary = "Détail d'un utilisateur", description = "Récupérer les informations d'un utilisateur (Admin seulement)")
+    public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
+        return ResponseEntity.ok(userService.getUserById(id));
+    }
+
+    @PutMapping("/admin/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    @Operation(summary = "Mettre à jour un utilisateur", description = "Mettre à jour un utilisateur (Admin seulement)")
+    public ResponseEntity<UserDTO> updateUser(@PathVariable Long id, @RequestBody UserDTO dto) {
+        return ResponseEntity.ok(userService.updateUser(id, dto));
+    }
+
+    @DeleteMapping("/admin/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    @Operation(summary = "Supprimer un utilisateur", description = "Supprimer un utilisateur (Admin seulement)")
+    public ResponseEntity<?> deleteUser(@PathVariable Long id) {
+        userService.deleteUser(id);
+        return ResponseEntity.ok("Utilisateur supprimé");
     }
 }

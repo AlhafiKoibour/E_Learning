@@ -16,9 +16,10 @@ public class LessonDTO {
     private String title;
     private String description;
     private String videoUrl;
+    private String documentUrl;
     private Integer duration;
     private Boolean completed;
     private Integer orderIndex;
     private List<ResourceDTO> resources;
-    private Long moduleId;
+    private List<Long> moduleIds;
 }

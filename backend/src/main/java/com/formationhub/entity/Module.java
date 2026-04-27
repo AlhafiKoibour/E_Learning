@@ -2,7 +2,6 @@ package com.formationhub.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,7 +12,6 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Entity
 @Table(name = "modules")
 public class Module {
@@ -41,9 +39,6 @@ public class Module {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "formation_id", nullable = false)
     private Formation formation;
-
-    @OneToMany(mappedBy = "module", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Lesson> lessons = new HashSet<>();
 
     @OneToMany(mappedBy = "module", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Quiz> quizzes = new HashSet<>();

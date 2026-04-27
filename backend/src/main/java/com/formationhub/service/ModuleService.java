@@ -6,7 +6,7 @@ import com.formationhub.repository.LessonRepository;
 import com.formationhub.repository.ModuleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import java.util.Collections;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,6 +17,14 @@ public class ModuleService {
 
     private final ModuleRepository moduleRepository;
     private final LessonRepository lessonRepository;
+
+    @Transactional(readOnly = true)
+    public List<ModuleDTO> getAllModules() {
+        return moduleRepository.findAll()
+                .stream()
+                .map(this::mapToDTO)
+                .collect(Collectors.toList());
+    }
 
     @Transactional(readOnly = true)
     public List<ModuleDTO> getModulesByFormation(Long formationId) {
@@ -33,6 +41,31 @@ public class ModuleService {
                 .orElseThrow(() -> new RuntimeException("Module non trouvé"));
     }
 
+    @Transactional
+    public ModuleDTO createModule(ModuleDTO dto) {
+        Module module = mapToEntity(dto);
+        return mapToDTO(moduleRepository.save(module));
+    }
+
+    @Transactional
+    public ModuleDTO updateModule(Long id, ModuleDTO dto) {
+        Module module = moduleRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Module non trouvé"));
+        module.setTitle(dto.getTitle());
+        module.setDescription(dto.getDescription());
+        module.setOrderIndex(dto.getOrderIndex());
+        module.setDurationHours(dto.getDurationHours());
+        return mapToDTO(moduleRepository.save(module));
+    }
+
+    @Transactional
+    public void deleteModule(Long id) {
+        if (!moduleRepository.existsById(id)) {
+            throw new RuntimeException("Module non trouvé");
+        }
+        moduleRepository.deleteById(id);
+    }
+
     private ModuleDTO mapToDTO(Module module) {
         return ModuleDTO.builder()
                 .id(module.getId())
@@ -42,18 +75,17 @@ public class ModuleService {
                 .durationHours(module.getDurationHours())
                 .formationId(module.getFormation() != null ? module.getFormation().getId() : null)
                 .createdAt(module.getCreatedAt())
-                .lessons(lessonRepository.findByModuleIdOrderByOrderIndex(module.getId())
-                        .stream()
-                        .map(lesson -> com.formationhub.dto.LessonDTO.builder()
-                                .id(lesson.getId())
-                                .title(lesson.getTitle())
-                                .description(lesson.getDescription())
-                                .videoUrl(lesson.getVideoUrl())
-                                .duration(lesson.getDurationMinutes())
-                                .orderIndex(lesson.getOrderIndex())
-                                .moduleId(module.getId())
-                                .build())
-                        .collect(Collectors.toList()))
+                .lessons(Collections.emptyList())
                 .build();
+    }
+
+    private Module mapToEntity(ModuleDTO dto) {
+        Module module = new Module();
+        module.setTitle(dto.getTitle());
+        module.setDescription(dto.getDescription());
+        module.setOrderIndex(dto.getOrderIndex());
+        module.setDurationHours(dto.getDurationHours());
+        // Note: formation needs to be set
+        return module;
     }
 }

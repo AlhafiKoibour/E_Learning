@@ -76,6 +76,46 @@ public class UserService {
         return enrollment.getProgressPercentage();
     }
 
+    // Admin methods
+    @Transactional(readOnly = true)
+    public List<UserDTO> getAllUsers() {
+        return userRepository.findAll()
+                .stream()
+                .map(this::mapToDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public UserDTO getUserById(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Utilisateur non trouvé"));
+        return mapToDTO(user);
+    }
+
+    @Transactional
+    public UserDTO updateUser(Long id, UserDTO dto) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Utilisateur non trouvé"));
+        user.setFirstName(dto.getFirstName());
+        user.setLastName(dto.getLastName());
+        user.setPhone(dto.getPhone());
+        user.setBio(dto.getBio());
+        user.setProfilePicture(dto.getProfilePicture());
+        user.setIsActive(dto.getIsActive());
+        user.setIsVerified(dto.getIsVerified());
+        user.setRole(dto.getRole() != null ? User.UserRole.valueOf(dto.getRole().toUpperCase()) : user.getRole());
+        user = userRepository.save(user);
+        return mapToDTO(user);
+    }
+
+    @Transactional
+    public void deleteUser(Long id) {
+        if (!userRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Utilisateur non trouvé");
+        }
+        userRepository.deleteById(id);
+    }
+
     private User getCurrentUser() {
         Long userId = jwtTokenProvider.getCurrentUserId();
         return userRepository.findById(userId)

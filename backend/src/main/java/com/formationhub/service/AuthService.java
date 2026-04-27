@@ -33,6 +33,7 @@ public class AuthService {
 
     public AuthResponse login(AuthRequest request) {
         try {
+            log.debug("Tentative de connexion pour l'email: {}", request.getEmail());
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
             );
@@ -50,7 +51,7 @@ public class AuthService {
                     .message("Connexion réussie")
                     .build();
         } catch (Exception e) {
-            log.error("Erreur lors de la connexion: {}", e.getMessage());
+            log.error("Erreur lors de la connexion pour l'email {}: {}", request.getEmail(), e.getMessage());
             throw new UnauthorizedException("Email ou mot de passe invalide");
         }
     }
