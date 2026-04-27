@@ -1,0 +1,7 @@
+export { Home } from './Home'
+export { Formations } from './Formations'
+export { FormationDetail } from './FormationDetail'
+export { Login } from './Login'
+export { Register } from './Register'
+export { Dashboard } from './Dashboard'
+export { Learning } from './Learning'

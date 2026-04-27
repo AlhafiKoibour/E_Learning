@@ -1,0 +1,65 @@
+version: '3.8'
+
+services:
+  # MySQL Database
+  mysql:
+    image: mysql:8.0
+    container_name: formation_hub_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: formation_hub
+      MYSQL_USER: formation_user
+      MYSQL_PASSWORD: formation_password
+      TZ: 'UTC'
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - formation_network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  # Backend Spring Boot (sera construit et lancé localement)
+  # backend:
+  #   build:
+  #     context: ./backend
+  #     dockerfile: Dockerfile
+  #   container_name: formation_hub_backend
+  #   ports:
+  #     - "8080:8080"
+  #   environment:
+  #     SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/formation_hub
+  #     SPRING_DATASOURCE_USERNAME: formation_user
+  #     SPRING_DATASOURCE_PASSWORD: formation_password
+  #     JWT_SECRET: your-super-secret-key-change-this-in-production
+  #   depends_on:
+  #     mysql:
+  #       condition: service_healthy
+  #   networks:
+  #     - formation_network
+
+  # Frontend React (optionnel - sera lancé avec npm run dev)
+  # frontend:
+  #   build:
+  #     context: ./frontend
+  #     dockerfile: Dockerfile
+  #   container_name: formation_hub_frontend
+  #   ports:
+  #     - "3000:3000"
+  #   environment:
+  #     VITE_API_URL: http://localhost:8080/api
+  #   depends_on:
+  #     - backend
+  #   networks:
+  #     - formation_network
+
+volumes:
+  mysql_data:
+    driver: local
+
+networks:
+  formation_network:
+    driver: bridge
