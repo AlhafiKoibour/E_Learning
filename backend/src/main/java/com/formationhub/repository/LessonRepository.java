@@ -10,4 +10,5 @@ import java.util.List;
 
 @Repository
 public interface LessonRepository extends JpaRepository<Lesson, Long> {
+    List<Lesson> findByModuleIdOrderByOrderIndex(Long moduleId);
 }

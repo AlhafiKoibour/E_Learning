@@ -5,6 +5,7 @@ import { useAuth } from '../hooks/useAuth'
 import { authService } from '../services/userService'
 import toast from 'react-hot-toast'
 import { FaEnvelope, FaLock } from 'react-icons/fa'
+import { getApiErrorMessage } from '../utils/errorHelper'
 
 export const Login = () => {
   const navigate = useNavigate()
@@ -51,7 +52,8 @@ export const Login = () => {
       toast.success('Connexion réussie!')
       navigate('/dashboard')
     } catch (error) {
-      toast.error(error.response?.data?.message || 'Erreur de connexion')
+      console.error('Erreur connexion:', error)
+      toast.error(getApiErrorMessage(error) || 'Erreur de connexion')
     } finally {
       setIsLoading(false)
     }

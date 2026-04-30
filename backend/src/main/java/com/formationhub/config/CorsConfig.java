@@ -1,37 +1,28 @@
 package com.formationhub.config;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
+
+import java.util.Arrays;
 
 @Configuration
-public class CorsConfig implements WebMvcConfigurer {
+public class CorsConfig {
 
-    @Value("${cors.allowedOrigins}")
-    private String allowedOrigins;
+    @Bean
+    public CorsFilter corsFilter() {
+        CorsConfiguration corsConfiguration = new CorsConfiguration();
+        corsConfiguration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "http://localhost:5173"));
+        corsConfiguration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        corsConfiguration.setAllowedHeaders(Arrays.asList("*"));
+        corsConfiguration.setAllowCredentials(true);
+        corsConfiguration.setMaxAge(3600L);
 
-    @Value("${cors.allowedMethods}")
-    private String allowedMethods;
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", corsConfiguration);
 
-    @Value("${cors.allowedHeaders}")
-    private String allowedHeaders;
-
-    @Value("${cors.allowCredentials}")
-    private boolean allowCredentials;
-
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        var mapping = registry.addMapping("/api/**")
-                .allowedOrigins(allowedOrigins.split(","))
-                .allowedMethods(allowedMethods.split(","))
-                .allowCredentials(allowCredentials)
-                .maxAge(3600);
-        
-        if ("*".equals(allowedHeaders)) {
-            mapping.allowedHeaders("*");
-        } else {
-            mapping.allowedHeaders(allowedHeaders.split(","));
-        }
+        return new CorsFilter(source);
     }
 }

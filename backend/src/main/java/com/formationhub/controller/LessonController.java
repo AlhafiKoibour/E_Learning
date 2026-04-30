@@ -24,6 +24,12 @@ public class LessonController {
         return ResponseEntity.ok(lessonService.getAllLessons());
     }
 
+    @GetMapping("/by-module/{moduleId}")
+    @Operation(summary = "Leçons d'un module", description = "Récupérer toutes les leçons d'un module")
+    public ResponseEntity<List<LessonDTO>> getLessonsByModule(@PathVariable Long moduleId) {
+        return ResponseEntity.ok(lessonService.getLessonsByModule(moduleId));
+    }
+
     @GetMapping("/{id}")
     @Operation(summary = "Détail d'une leçon", description = "Récupérer les informations d'une leçon")
     public ResponseEntity<LessonDTO> getLessonById(@PathVariable Long id) {

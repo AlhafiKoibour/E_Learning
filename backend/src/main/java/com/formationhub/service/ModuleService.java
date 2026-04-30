@@ -2,10 +2,12 @@ package com.formationhub.service;
 
 import com.formationhub.dto.ModuleDTO;
 import com.formationhub.entity.Module;
-import com.formationhub.repository.LessonRepository;
+import com.formationhub.exception.ResourceNotFoundException;
+import com.formationhub.repository.FormationRepository;
 import com.formationhub.repository.ModuleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.Collections;
 
 import java.util.List;
@@ -16,7 +18,7 @@ import java.util.stream.Collectors;
 public class ModuleService {
 
     private final ModuleRepository moduleRepository;
-    private final LessonRepository lessonRepository;
+    private final FormationRepository formationRepository;
 
     @Transactional(readOnly = true)
     public List<ModuleDTO> getAllModules() {
@@ -44,6 +46,11 @@ public class ModuleService {
     @Transactional
     public ModuleDTO createModule(ModuleDTO dto) {
         Module module = mapToEntity(dto);
+        if (dto.getFormationId() != null) {
+            var formation = formationRepository.findById(dto.getFormationId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Formation non trouvée"));
+            module.setFormation(formation);
+        }
         return mapToDTO(moduleRepository.save(module));
     }
 
@@ -85,7 +92,6 @@ public class ModuleService {
         module.setDescription(dto.getDescription());
         module.setOrderIndex(dto.getOrderIndex());
         module.setDurationHours(dto.getDurationHours());
-        // Note: formation needs to be set
         return module;
     }
 }

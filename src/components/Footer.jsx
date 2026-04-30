@@ -52,7 +52,7 @@ export const Footer = () => {
         </div>
 
         <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400 text-sm">
-          <p>&copy; 2024 FormationHub. Tous droits réservés.</p>
+          <p>&copy; 2026 FormationHub. Tous droits réservés.</p>
         </div>
       </div>
     </footer>

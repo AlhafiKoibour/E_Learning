@@ -3,7 +3,9 @@ package com.formationhub.service;
 import com.formationhub.dto.LessonDTO;
 import com.formationhub.dto.ResourceDTO;
 import com.formationhub.entity.Lesson;
+import com.formationhub.exception.ResourceNotFoundException;
 import com.formationhub.repository.LessonRepository;
+import com.formationhub.repository.ModuleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +20,15 @@ import java.util.stream.Collectors;
 public class LessonService {
 
     private final LessonRepository lessonRepository;
+    private final ModuleRepository moduleRepository;
+
+    @Transactional(readOnly = true)
+    public List<LessonDTO> getLessonsByModule(Long moduleId) {
+        return lessonRepository.findByModuleIdOrderByOrderIndex(moduleId)
+                .stream()
+                .map(this::mapToDTO)
+                .collect(Collectors.toList());
+    }
 
     @Transactional(readOnly = true)
     public List<LessonDTO> getAllLessons() {
@@ -37,8 +48,13 @@ public class LessonService {
     @Transactional
     public LessonDTO createLesson(LessonDTO dto) {
         Lesson lesson = mapToEntity(dto);
+        // Si moduleIds est fourni, attacher le premier module
+        if (dto.getModuleIds() != null && !dto.getModuleIds().isEmpty()) {
+            var module = moduleRepository.findById(dto.getModuleIds().get(0))
+                    .orElseThrow(() -> new ResourceNotFoundException("Module non trouvé"));
+            lesson.setModule(module);
+        }
         lesson = lessonRepository.save(lesson);
-        // Note: modules are managed from Module side
         return mapToDTO(lesson);
     }
 
@@ -52,7 +68,12 @@ public class LessonService {
         lesson.setDurationMinutes(dto.getDuration());
         lesson.setOrderIndex(dto.getOrderIndex());
         lesson.setDocumentUrl(dto.getDocumentUrl());
-        // Note: modules are managed from Module side
+        // Mettre à jour le module si moduleIds est fourni
+        if (dto.getModuleIds() != null && !dto.getModuleIds().isEmpty()) {
+            var module = moduleRepository.findById(dto.getModuleIds().get(0))
+                    .orElseThrow(() -> new ResourceNotFoundException("Module non trouvé"));
+            lesson.setModule(module);
+        }
         return mapToDTO(lessonRepository.save(lesson));
     }
 
@@ -65,6 +86,9 @@ public class LessonService {
     }
 
     private LessonDTO mapToDTO(Lesson lesson) {
+        List<Long> moduleIds = lesson.getModule() != null 
+            ? List.of(lesson.getModule().getId())
+            : Collections.emptyList();
         return LessonDTO.builder()
                 .id(lesson.getId())
                 .title(lesson.getTitle())
@@ -74,7 +98,7 @@ public class LessonService {
                 .orderIndex(lesson.getOrderIndex())
                 .completed(false)
                 .resources(buildResources(lesson))
-                .moduleIds(Collections.emptyList())
+                .moduleIds(moduleIds)
                 .build();
     }
 
@@ -86,7 +110,6 @@ public class LessonService {
         lesson.setDurationMinutes(dto.getDuration());
         lesson.setOrderIndex(dto.getOrderIndex());
         lesson.setDocumentUrl(dto.getDocumentUrl());
-        // Note: module needs to be set
         return lesson;
     }
 

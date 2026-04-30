@@ -5,6 +5,7 @@ import { useAuth } from '../hooks/useAuth'
 import { authService } from '../services/userService'
 import toast from 'react-hot-toast'
 import { FaUser, FaEnvelope, FaLock, FaPhone } from 'react-icons/fa'
+import { getApiErrorMessage } from '../utils/errorHelper'
 
 export const Register = () => {
   const navigate = useNavigate()
@@ -72,7 +73,8 @@ export const Register = () => {
       toast.success('Inscription réussie!')
       navigate('/dashboard')
     } catch (error) {
-      toast.error(error.response?.data?.message || 'Erreur lors de l\'inscription')
+      console.error('Erreur inscription:', error)
+      toast.error(getApiErrorMessage(error) || 'Erreur lors de l\'inscription')
     } finally {
       setIsLoading(false)
     }

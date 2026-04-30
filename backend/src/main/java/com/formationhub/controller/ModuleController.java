@@ -1,6 +1,8 @@
 package com.formationhub.controller;
 
+import com.formationhub.dto.LessonDTO;
 import com.formationhub.dto.ModuleDTO;
+import com.formationhub.service.LessonService;
 import com.formationhub.service.ModuleService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -17,6 +19,7 @@ import java.util.List;
 public class ModuleController {
 
     private final ModuleService moduleService;
+    private final LessonService lessonService;
 
     @GetMapping
     @Operation(summary = "Lister les modules", description = "Récupérer tous les modules")
@@ -28,6 +31,12 @@ public class ModuleController {
     @Operation(summary = "Détail d'un module", description = "Récupérer les informations d'un module")
     public ResponseEntity<ModuleDTO> getModuleById(@PathVariable Long id) {
         return ResponseEntity.ok(moduleService.getModuleById(id));
+    }
+
+    @GetMapping("/{moduleId}/lessons")
+    @Operation(summary = "Leçons d'un module", description = "Récupérer toutes les leçons d'un module")
+    public ResponseEntity<List<LessonDTO>> getLessonsByModule(@PathVariable Long moduleId) {
+        return ResponseEntity.ok(lessonService.getLessonsByModule(moduleId));
     }
 
     @PostMapping

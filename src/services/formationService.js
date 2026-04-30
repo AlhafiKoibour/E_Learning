@@ -1,8 +1,43 @@
 import apiClient from './apiClient'
+import axios from 'axios'
+
+const postgrestClient = axios.create({
+  baseURL: 'http://localhost:3001',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+})
+
+// Intercepteur pour ajouter le token
+postgrestClient.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('token')
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`
+    }
+    return config
+  },
+  (error) => Promise.reject(error)
+)
+
+// Intercepteur pour gérer les erreurs
+postgrestClient.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      localStorage.removeItem('token')
+      window.location.href = '/login'
+    }
+    return Promise.reject(error)
+  }
+)
 
 export const formationService = {
-  getAll: (params) => apiClient.get('/formations', { params }),
-  getById: (id) => apiClient.get(`/formations/${id}`),
+  getAll: (params) => postgrestClient.get('/formations', { params }),
+  getById: async (id) => {
+    const response = await postgrestClient.get(`/formations?id=eq.${id}`)
+    return { data: response.data[0] }
+  },
   create: (data) => apiClient.post('/formations', data),
   update: (id, data) => apiClient.put(`/formations/${id}`, data),
   delete: (id) => apiClient.delete(`/formations/${id}`),

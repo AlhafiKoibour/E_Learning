@@ -41,6 +41,10 @@ public class Lesson {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "module_id")
+    private Module module;
+
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();

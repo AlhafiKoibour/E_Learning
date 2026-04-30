@@ -1,26 +1,44 @@
 version: '3.8'
 
 services:
-  # MySQL Database
-  mysql:
-    image: mysql:8.0
-    container_name: formation_hub_mysql
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15
+    container_name: formation_hub_postgres
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: formation_hub
-      MYSQL_USER: formation_user
-      MYSQL_PASSWORD: formation_password
+      POSTGRES_DB: formation_hub
+      POSTGRES_USER: formation_user
+      POSTGRES_PASSWORD: formation_password
       TZ: 'UTC'
     ports:
-      - "3306:3306"
+      - "5433:5432"
     volumes:
-      - mysql_data:/var/lib/mysql
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - formation_network
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      test: ["CMD-SHELL", "pg_isready -U formation_user -d formation_hub"]
       timeout: 20s
       retries: 10
+
+  # PostgREST API
+  postgrest:
+    image: postgrest/postgrest:latest
+    container_name: formation_hub_postgrest
+    environment:
+      PGRST_DB_URI: postgres://formation_user:formation_password@postgres:5432/formation_hub
+      PGRST_DB_SCHEMA: public
+      PGRST_DB_ANON_ROLE: web_anon
+      PGRST_JWT_SECRET: your-super-secret-key-change-this-in-production-at-least-32-characters-long
+      PGRST_OPENAPI_SERVER_PROXY_URI: http://localhost:3001
+    ports:
+      - "3001:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - formation_network
 
   # Backend Spring Boot (sera construit et lancé localement)
   # backend:
@@ -31,12 +49,12 @@ services:
   #   ports:
   #     - "8080:8080"
   #   environment:
-  #     SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/formation_hub
+  #     SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/formation_hub
   #     SPRING_DATASOURCE_USERNAME: formation_user
   #     SPRING_DATASOURCE_PASSWORD: formation_password
   #     JWT_SECRET: your-super-secret-key-change-this-in-production
   #   depends_on:
-  #     mysql:
+  #     postgres:
   #       condition: service_healthy
   #   networks:
   #     - formation_network
@@ -57,7 +75,7 @@ services:
   #     - formation_network
 
 volumes:
-  mysql_data:
+  postgres_data:
     driver: local
 
 networks:
