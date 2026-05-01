@@ -71,7 +71,7 @@ export const Register = () => {
       setToken(response.data.token)
       setUser(response.data.user)
       toast.success('Inscription réussie!')
-      navigate('/dashboard')
+      navigate('/login')
     } catch (error) {
       console.error('Erreur inscription:', error)
       toast.error(getApiErrorMessage(error) || 'Erreur lors de l\'inscription')

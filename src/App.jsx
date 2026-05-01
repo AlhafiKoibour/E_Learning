@@ -9,6 +9,7 @@ import {
   Dashboard,
   Learning,
 } from './pages'
+import  { DashboardLayout }  from './pages/admin/DashboardLayout'
 import { Toaster } from 'react-hot-toast'
 import './styles/globals.css'
 
@@ -25,7 +26,10 @@ function App() {
             <Route path="/formations" element={<Formations />} />
             <Route path="/formations/:id" element={<FormationDetail />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/dashboardLayout" element={<DashboardLayout />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/learning" element={<Learning />} />
+
 
             {/* Protected Routes */}
             <Route

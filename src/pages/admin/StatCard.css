@@ -1,0 +1,54 @@
+.statCard {
+  background: #fff;
+  border-radius: 4px;
+  padding: 10px 12px 12px;
+  box-shadow: 0 2px 12px rgba(15, 23, 42, 0.08);
+  min-height: 84px;
+}
+
+.statCard__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.statCard__title {
+  font-size: 10px;
+  color: #9aa3b2;
+  font-weight: 700;
+}
+
+.statCard__label {
+  font-size: 9px;
+  background: #4f6ef7;
+  color: white;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-weight: 700;
+}
+
+.statCard__value {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1f2937;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.statCard__trend {
+  font-size: 11px;
+  color: #7c8598;
+}
+
+.statCard__trend span {
+  color: #a8b0be;
+}
+
+.statCard__trend.success {
+  color: #27ae60;
+}
+
+.statCard__trend.danger {
+  color: #e74c3c;
+}

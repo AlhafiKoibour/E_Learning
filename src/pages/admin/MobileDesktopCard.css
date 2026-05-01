@@ -1,0 +1,46 @@
+.mobileCard {
+  min-height: 270px;
+}
+
+.mobileCard__chart {
+  height: 185px;
+  margin-top: 12px;
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 12px 0;
+  border-left: 1px solid #eef2f7;
+  border-bottom: 1px solid #eef2f7;
+}
+
+.mobileCard__group {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  gap: 4px;
+}
+
+.mobileCard__bar {
+  width: 12px;
+  border-radius: 3px 3px 0 0;
+}
+
+.mobileCard__bar--a {
+  background: #5b75f5;
+}
+
+.mobileCard__bar--b {
+  background: #c9d4ff;
+}
+
+.mobileCard__legend {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 10px;
+  font-size: 11px;
+  color: #7b8496;
+}

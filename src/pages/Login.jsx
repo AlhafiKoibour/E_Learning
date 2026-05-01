@@ -50,7 +50,7 @@ export const Login = () => {
       setToken(response.data.token)
       setUser(response.data.user)
       toast.success('Connexion réussie!')
-      navigate('/dashboard')
+      navigate('/dashboardLayout')
     } catch (error) {
       console.error('Erreur connexion:', error)
       toast.error(getApiErrorMessage(error) || 'Erreur de connexion')

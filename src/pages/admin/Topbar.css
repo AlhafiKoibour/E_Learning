@@ -1,0 +1,47 @@
+.topbar {
+  height: 42px;
+  background: #fff;
+  border-bottom: 1px solid #e8e8e8;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+}
+
+.topbar__left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.topbar__menuBtn {
+  border: 0;
+  background: transparent;
+  font-size: 16px;
+  color: #61708f;
+  cursor: pointer;
+}
+
+.topbar__search input {
+  width: 265px;
+  height: 26px;
+  border: 1px solid #d8dee9;
+  border-radius: 4px;
+  padding: 0 10px;
+  font-size: 12px;
+  outline: none;
+}
+
+.topbar__right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.topbar__icon {
+  border: 0;
+  background: transparent;
+  font-size: 15px;
+  color: #6c7a95;
+  cursor: pointer;
+}
