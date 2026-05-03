@@ -1,0 +1,307 @@
+.modulePage {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  color: #1f2937;
+}
+
+.modulePage__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  background: #fff;
+  border-radius: 14px;
+  padding: 18px 20px;
+  box-shadow: 0 2px 12px rgba(15, 23, 42, 0.06);
+}
+
+.modulePage__header h2 {
+  font-size: 22px;
+  margin-bottom: 4px;
+}
+
+.modulePage__header p {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.modulePage__search {
+  min-width: 280px;
+  height: 40px;
+  border: 1px solid #dce3ef;
+  border-radius: 10px;
+  padding: 0 12px;
+  outline: none;
+}
+
+.moduleStats {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+}
+
+.moduleStatCard {
+  background: #fff;
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 2px 12px rgba(15, 23, 42, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-left: 5px solid #4f6ef7;
+}
+
+.moduleStatCard span {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.moduleStatCard strong {
+  font-size: 28px;
+}
+
+.modulePage__layout {
+  display: block;
+  width: 100%;
+}
+
+.modulePage__mainCard,
+.modalCard {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(15, 23, 42, 0.06);
+}
+
+.modulePage__mainCard {
+  padding: 16px;
+  width: 100%;
+  overflow-x: auto;
+}
+
+.cardHeader,
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.cardHeader h3,
+.modalHeader h3 {
+  font-size: 16px;
+}
+
+.cardHeader span {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.moduleTable {
+  width: 100%;
+  min-width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.moduleTable th,
+.moduleTable td {
+  text-align: left;
+  padding: 12px 10px;
+  border-bottom: 1px solid #eef2f7;
+  font-size: 13px;
+  vertical-align: middle;
+}
+
+.moduleCell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.moduleAvatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4f6ef7, #7c93ff);
+  color: white;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.moduleCell p {
+  color: #6b7280;
+  font-size: 12px;
+}
+
+.lessonBadge {
+  display: inline-flex;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #eef2ff;
+  color: #4f46e5;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.statusSelect {
+  min-width: 120px;
+  height: 34px;
+  border-radius: 10px;
+  border: 1px solid #dce3ef;
+  padding: 0 10px;
+  font-weight: 700;
+}
+
+.statusSelect--published {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.statusSelect--draft {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.statusSelect--archived {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.actionButtons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: nowrap;
+  align-items: center;
+  width: 100%;
+  overflow-x: auto;
+}
+
+.actionButtons .btn {
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.moduleForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.moduleForm input,
+.moduleForm select,
+.fullSelect {
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid #dce3ef;
+  padding: 0 12px;
+  outline: none;
+  font-size: 14px;
+}
+
+.btn {
+  height: 36px;
+  border: none;
+  border-radius: 10px;
+  padding: 0 12px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn--primary {
+  background: #4f6ef7;
+  color: white;
+}
+
+.btn--secondary {
+  background: #e5e7eb;
+  color: #111827;
+}
+
+.btn--info {
+  background: #3b82f6;
+  color: white;
+}
+
+.btn--danger {
+  background: #ef4444;
+  color: white;
+}
+
+.btn--success {
+  background: #22c55e;
+  color: white;
+}
+
+.btn--purple {
+  background: #8b5cf6;
+  color: white;
+}
+
+.modalBackDrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  display: grid;
+  place-items: center;
+  z-index: 50;
+  padding: 16px;
+}
+
+.modalCard {
+  width: min(460px, 100%);
+  padding: 18px;
+}
+
+.closeBtn {
+  border: none;
+  background: transparent;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  color: #6b7280;
+}
+
+.modalCard p {
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 12px;
+}
+
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+@media (max-width: 1200px) {
+  .moduleStats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 800px) {
+  .modulePage__header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .modulePage__search {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .moduleStats {
+    grid-template-columns: 1fr;
+  }
+
+  .moduleTable {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}

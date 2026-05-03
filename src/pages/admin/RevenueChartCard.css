@@ -1,107 +1,119 @@
+/* Conteneur principal de la carte */
 .card {
   background: #fff;
-  border-radius: 4px;
-  box-shadow: 0 2px 12px rgba(15, 23, 42, 0.08);
-  padding: 12px;
+  border-radius: 8px; /* Arrondi légèrement plus prononcé pour un look moderne */
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05); /* Ombre plus douce */
+  padding: 16px;
+  transition: transform 0.2s ease; /* Petit effet au survol si besoin */
 }
 
 .card--big {
-  min-height: 295px;
+  min-height: 320px; /* Augmenté pour laisser respirer la légende en bas */
 }
 
 .card__header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .card__header h3 {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 700;
-  color: #1f2937;
+  color: #1e293b; /* Couleur ardoise plus profonde */
 }
 
+/* Le menu ⋮ */
 .card__menu {
   border: 0;
   background: transparent;
-  color: #7a869a;
-  font-size: 18px;
+  color: #94a3b8;
+  font-size: 20px;
   cursor: pointer;
+  padding: 4px;
+  line-height: 1;
 }
 
+/* Zone du graphique */
 .revenueChart {
   position: relative;
-  height: 250px;
-  border-top: 1px solid #f0f2f6;
-  padding-top: 20px;
-  overflow: hidden;
+  height: 220px;
+  border-top: 1px solid #f1f5f9;
+  padding-top: 25px;
+  margin-top: 10px;
 }
 
+/* Chiffres sur l'axe Y (120k, 90k...) */
 .revenueChart__grid {
   position: absolute;
   left: 0;
-  top: 18px;
-  bottom: 28px;
+  top: 25px;
+  bottom: 45px;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  color: #b8c0cf;
-  font-size: 10px;
-  padding-left: 6px;
+  color: #94a3b8;
+  font-size: 11px;
+  pointer-events: none; /* Pour ne pas gêner le clic */
+  z-index: 1;
 }
 
+/* Lignes de courbes (Secteur Développement et Design) */
 .revenueChart__line {
   position: absolute;
   left: 0;
   right: 0;
-  height: 110px;
-  border-radius: 50% 50% 0 0;
-  opacity: 0.95;
+  height: 140px; /* Ajusté pour correspondre à l'échelle */
+  transition: all 0.3s ease;
 }
 
+/* Courbe "Développement" (Principale) */
 .revenueChart__line--1 {
-  bottom: 44px;
-  background: linear-gradient(180deg, rgba(86, 113, 244, 0.45), rgba(86, 113, 244, 0.12));
-  clip-path: polygon(0 72%, 10% 68%, 20% 63%, 30% 66%, 40% 52%, 50% 58%, 60% 48%, 70% 55%, 80% 28%, 90% 18%, 100% 24%, 100% 100%, 0 100%);
-  border: 2px solid #5b75f5;
+  bottom: 50px;
+  background: linear-gradient(180deg, rgba(91, 117, 245, 0.25), rgba(91, 117, 245, 0));
+  clip-path: polygon(0 70%, 15% 65%, 30% 68%, 45% 45%, 60% 50%, 75% 30%, 90% 20%, 100% 25%, 100% 100%, 0 100%);
+  border-top: 2.5px solid #5b75f5; /* Ligne plus épaisse pour le focus */
+  z-index: 3;
 }
 
+/* Courbe "Design" (Secondaire) */
 .revenueChart__line--2 {
-  bottom: 54px;
-  background: rgba(112, 142, 255, 0.14);
-  clip-path: polygon(0 86%, 10% 80%, 20% 75%, 30% 72%, 40% 60%, 50% 64%, 60% 58%, 70% 52%, 80% 62%, 90% 50%, 100% 56%, 100% 100%, 0 100%);
+  bottom: 50px;
+  background: linear-gradient(180deg, rgba(184, 198, 255, 0.2), rgba(184, 198, 255, 0));
+  clip-path: polygon(0 85%, 15% 80%, 30% 75%, 45% 65%, 60% 60%, 75% 55%, 90% 45%, 100% 50%, 100% 100%, 0 100%);
+  border-top: 2px solid #b8c6ff;
+  z-index: 2;
 }
 
+/* Légende en bas */
 .revenueChart__legend {
   position: absolute;
-  bottom: 0;
+  bottom: 5px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 14px;
-  font-size: 11px;
-  color: #7b8496;
+  gap: 20px;
+  font-size: 12px;
+  color: #64748b;
+  width: 100%;
+  justify-content: center;
 }
 
 .revenueChart__legend span {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
 }
 
+/* Les puces de couleur */
 .legendDot {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   display: inline-block;
 }
 
-.legendDot--1 {
-  background: #5b75f5;
-}
-
-.legendDot--2 {
-  background: #b8c6ff;
-}
+.legendDot--1 { background: #5b75f5; } /* Bleu Dev */
+.legendDot--2 { background: #b8c6ff; } /* Bleu clair Design */

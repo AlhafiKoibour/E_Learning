@@ -48,9 +48,6 @@ export const Home = () => {
                 Explorer les formations
               </Button>
             </Link>
-            <Button variant="outline" size="lg">
-              Demander une démo
-            </Button>
           </div>
         </div>
       </section>
@@ -110,7 +107,7 @@ export const Home = () => {
       <section className="bg-primary text-white py-16">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-4">Prêt à commencer votre formation ?</h2>
-          <p className="text-xl mb-8">Inscrivez-vous dès aujourd'hui et recevez 20% de réduction</p>
+          <p className="text-xl mb-8">Inscrivez-vous dès aujourd'hui et accédez gratuitement à la formation</p>
           <Link to="/register">
             <Button variant="secondary" size="lg">
               S'inscrire maintenant
