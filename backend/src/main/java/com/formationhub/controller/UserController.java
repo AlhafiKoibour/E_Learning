@@ -52,6 +52,12 @@ public class UserController {
         return ResponseEntity.ok(userService.getProgress(formationId));
     }
 
+    @GetMapping("/stats")
+    @Operation(summary = "Statistiques utilisateur", description = "Récupérer les statistiques globales de l'utilisateur")
+    public ResponseEntity<Map<String, Object>> getStats() {
+        return ResponseEntity.ok(userService.getStats());
+    }
+
     // Admin endpoints
     @GetMapping("/admin")
     @PreAuthorize("hasRole('ADMIN')")

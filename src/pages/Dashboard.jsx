@@ -20,7 +20,7 @@ export const Dashboard = () => {
     try {
       const [formationsRes, statsRes] = await Promise.all([
         userService.getMyFormations(),
-        userService.getProgress(null),
+        userService.getStats(),
       ])
       setFormations(formationsRes.data)
       setStats(statsRes.data)

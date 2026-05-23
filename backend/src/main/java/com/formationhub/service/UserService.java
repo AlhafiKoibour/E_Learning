@@ -76,6 +76,31 @@ public class UserService {
         return enrollment.getProgressPercentage();
     }
 
+    @Transactional(readOnly = true)
+    public java.util.Map<String, Object> getStats() {
+        Long userId = getCurrentUser().getId();
+        List<Enrollment> enrollments = enrollmentRepository.findByLearnerId(userId);
+        
+        int enrollmentCount = enrollments.size();
+        double hoursCompleted = enrollments.stream()
+                .mapToDouble(e -> e.getFormation().getDurationWeeks() * (e.getProgressPercentage() / 100.0) * 25)
+                .sum();
+        long certificateCount = enrollments.stream()
+                .filter(e -> e.getProgressPercentage() >= 100)
+                .count();
+        double averageProgress = enrollments.isEmpty() ? 0 : enrollments.stream()
+                .mapToDouble(Enrollment::getProgressPercentage)
+                .average()
+                .orElse(0);
+        
+        return java.util.Map.of(
+                "enrollmentCount", enrollmentCount,
+                "hoursCompleted", Math.round(hoursCompleted),
+                "certificateCount", certificateCount,
+                "averageProgress", Math.round(averageProgress)
+        );
+    }
+
     // Admin methods
     @Transactional(readOnly = true)
     public List<UserDTO> getAllUsers() {

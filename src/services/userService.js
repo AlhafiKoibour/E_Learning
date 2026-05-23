@@ -20,6 +20,7 @@ export const userService = {
   getMyFormations: () => apiClient.get('/users/formations'),
   getProgress: (formationId) =>
     apiClient.get(`/users/progress/${formationId}`),
+  getStats: () => apiClient.get('/users/stats'),
 }
 
 export const enrollmentService = {
