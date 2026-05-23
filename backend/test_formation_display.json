@@ -1,0 +1,8 @@
+{
+  "title": "Formation Visible Test",
+  "description": "Formation destinée à apparaître dans le catalogue (dev, BEGINNER, ONLINE)",
+  "domain": "dev",
+  "level": "BEGINNER",
+  "mode": "ONLINE",
+  "published": true
+}

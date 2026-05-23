@@ -10,6 +10,7 @@ import com.formationhub.repository.FormationRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -74,6 +75,7 @@ public class FormationService {
     }
 
     @Transactional
+    @CacheEvict(value = "formations", allEntries = true)
     public FormationDTO createFormation(FormationDTO dto) {
         Formation formation = mapToEntity(dto);
         Formation saved = formationRepository.save(formation);
@@ -81,6 +83,7 @@ public class FormationService {
     }
 
     @Transactional
+    @CacheEvict(value = "formations", allEntries = true)
     public FormationDTO updateFormation(Long id, FormationDTO dto) {
         Formation formation = formationRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Formation non trouvée"));
@@ -104,6 +107,7 @@ public class FormationService {
     }
 
     @Transactional
+    @CacheEvict(value = "formations", allEntries = true)
     public void deleteFormation(Long id) {
         if (!formationRepository.existsById(id)) {
             throw new RuntimeException("Formation non trouvée");
