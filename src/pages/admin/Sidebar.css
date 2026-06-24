@@ -1,37 +1,88 @@
+/* ===================================================
+   SIDEBAR — Navigation latérale du dashboard admin
+   =================================================== */
+
 .sidebar {
-  width: 260px;
+  width: 240px;
   min-height: 100vh;
-  background: #4f6ef7;
+  background: linear-gradient(180deg, #1e1b4b 0%, #312e81 60%, #4338ca 100%);
   color: #fff;
   display: flex;
   flex-direction: column;
-  padding: 20px 16px;
+  padding: 0;
+  flex-shrink: 0;
+  transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  position: relative;
 }
 
-.sidebar__profile {
-  padding: 14px 12px;
-  margin-bottom: 18px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.06);
+/* Mode réduit */
+.sidebar--collapsed {
+  width: 64px;
 }
 
-.sidebar__profile strong {
-  font-size: 14px;
-  line-height: 1.4;
+/* ===== LOGO ===== */
+.sidebar__logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  min-height: 60px;
+  flex-shrink: 0;
 }
 
+.sidebar__logoIcon {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: white;
+  font-weight: 900;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 2px 10px rgba(99, 102, 241, 0.5);
+}
+
+.sidebar__logoText {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: white;
+  white-space: nowrap;
+  letter-spacing: -0.3px;
+}
+
+/* ===== NAVIGATION ===== */
 .sidebar__nav {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 4px;
+  padding: 12px 8px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Scrollbar discrète */
+.sidebar__nav::-webkit-scrollbar { width: 3px; }
+.sidebar__nav::-webkit-scrollbar-track { background: transparent; }
+.sidebar__nav::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 99px; }
+
+.sidebar__group {
+  margin-bottom: 4px;
 }
 
 .sidebar__groupTitle {
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  color: #9ca3af;
-  margin-bottom: 8px;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.35);
   font-weight: 700;
+  text-transform: uppercase;
+  padding: 10px 8px 4px;
+  white-space: nowrap;
 }
 
 .sidebar__list {
@@ -40,36 +91,155 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 2px;
 }
 
-.sidebar__item {
-  width: 100%;
-}
+.sidebar__item { width: 100%; }
 
 .sidebar__link {
   display: flex;
   align-items: center;
   gap: 10px;
   text-decoration: none;
-  color: #d1d5db;
-  padding: 10px 12px;
+  color: rgba(255, 255, 255, 0.65);
+  padding: 9px 10px;
   border-radius: 10px;
-  transition: 0.2s ease;
-  font-size: 14px;
+  transition: all 0.18s ease;
+  font-size: 0.875rem;
+  font-weight: 500;
+  white-space: nowrap;
+  position: relative;
 }
 
 .sidebar__link:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.1);
   color: #fff;
 }
 
-.sidebar__link.active {
-  background: #4f6ef7;
-  color: #fff;
+/* État actif */
+.sidebar__link--active {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  font-weight: 700;
+  box-shadow: inset 3px 0 0 #a5b4fc;
 }
 
-.sidebar__dot {
-  font-size: 18px;
-  line-height: 1;
+/* Indicateur actif barre gauche */
+.sidebar__link--active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 60%;
+  background: #a5b4fc;
+  border-radius: 0 2px 2px 0;
+}
+
+.sidebar__icon {
+  font-size: 1rem;
+  width: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sidebar__label {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ===== FOOTER ===== */
+.sidebar__footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.15);
+  flex-shrink: 0;
+}
+
+.sidebar__footerAvatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: white;
+  font-weight: 800;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sidebar__footerInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  overflow: hidden;
+}
+
+.sidebar__footerInfo strong {
+  font-size: 0.82rem;
+  color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar__footerInfo span {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.5);
+  white-space: nowrap;
+}
+
+/* ===== COLLAPSED — Tooltip au hover ===== */
+.sidebar--collapsed .sidebar__link {
+  justify-content: center;
+  padding: 10px;
+}
+
+.sidebar--collapsed .sidebar__link:hover::after {
+  content: attr(title);
+  position: absolute;
+  left: calc(100% + 10px);
+  top: 50%;
+  transform: translateY(-50%);
+  background: #1e293b;
+  color: white;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 7px;
+  white-space: nowrap;
+  z-index: 9999;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  pointer-events: none;
+}
+
+/* Mise à jour dashboard pour la transition */
+.dashboard {
+  min-height: 100vh;
+  display: flex;
+  background: #f3f5fb;
+  transition: all 0.25s ease;
+}
+
+.dashboard__main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.dashboard__content {
+  padding: 20px;
+  flex: 1;
+  overflow-y: auto;
 }

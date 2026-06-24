@@ -9,7 +9,7 @@ export default function FooterPage() {
         <a href="#">Confidentialité</a>
         <a href="#">Conditions d'utilisation</a>
       </div>
-      <div className="footer__copy">© 2026 FormationHub</div>
+      <div className="footer__copy">© 2026 ToumaiHub</div>
     </footer>
   );
 }

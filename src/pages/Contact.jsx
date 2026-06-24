@@ -126,7 +126,7 @@ export default function Contact() {
       <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
         <div>
           <h3 className="font-bold text-gray-800">Email</h3>
-          <p className="text-blue-600">contact@formationhub.com</p>
+          <p className="text-blue-600">contact@toumaihub.com</p>
         </div>
         <div>
           <h3 className="font-bold text-gray-800">Téléphone</h3>

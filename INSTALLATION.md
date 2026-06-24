@@ -1,4 +1,4 @@
-# Guide d'Installation - FormationHub
+# Guide d'Installation - ToumaiHub
 
 ## 📋 Prérequis
 
@@ -156,7 +156,7 @@ docker-compose down
 
 ```env
 VITE_API_URL=http://localhost:8080/api
-VITE_APP_NAME=FormationHub
+VITE_APP_NAME=ToumaiHub
 VITE_APP_VERSION=1.0.0
 ```
 

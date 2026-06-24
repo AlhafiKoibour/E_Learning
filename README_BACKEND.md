@@ -1,4 +1,4 @@
-# FormationHub - Backend Spring Boot
+# ToumaiHub - Backend Spring Boot
 
 Plateforme de formation digitale inspirée de GOMYCODE - API REST avec Spring Boot.
 

@@ -15,7 +15,7 @@
     <groupId>com</groupId>
     <artifactId>formation-hub-backend</artifactId>
     <version>1.0.0</version>
-    <name>FormationHub Backend</name>
+    <name>ToumaiHub Backend</name>
     <description>Plateforme de formation digitale</description>
 
     <properties>

@@ -13,12 +13,17 @@ export const Navbar = () => {
     navigate('/')
   }
 
+  // Hide navbar for admin users
+  if (isAuthenticated && user?.role === 'ADMIN') {
+    return null
+  }
+
   return (
     <nav className="bg-white shadow-md">
       <div className="max-w-7xl mx-auto px-4 py-3">
         <div className="flex justify-between items-center">
           <Link to="/" className="text-xl font-bold text-primary">
-            FormationHub
+            ToumaiHub
           </Link>
 
           {/* Desktop Menu */}

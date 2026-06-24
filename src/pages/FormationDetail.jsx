@@ -163,7 +163,7 @@ export const FormationDetail = () => {
                           <h3 className="font-semibold text-lg mb-2">Module {i + 1}: {module.title}</h3>
                           <p className="text-gray-600 mb-3">{module.description}</p>
                           <div className="text-sm text-gray-500">
-                            {module.lessons} leçons • {module.duration} heures
+                            {module.lessons?.length || 0} leçons • {module.durationHours || 0} heures
                           </div>
                         </div>
                       ))}
@@ -178,9 +178,17 @@ export const FormationDetail = () => {
           <div className="lg:col-span-1">
             <div className="bg-white rounded-lg shadow-lg p-6 sticky top-4">
               <h2 className="text-3xl font-bold text-primary mb-2">
-                {formation.price} DA
+                {formation.price === 0 ? (
+                  <span className="text-green-600 font-bold">
+                    Gratuit 🎉
+                  </span>
+                ) : (
+                  `${formation.price?.toLocaleString()} FCFA`
+                )}
               </h2>
-              <p className="text-gray-600 mb-6">Paiement unique</p>
+              <p className="text-gray-600 mb-6">
+                {formation.price === 0 ? 'Accès gratuit & illimité' : 'Paiement unique'}
+              </p>
 
               <Button
                 fullWidth

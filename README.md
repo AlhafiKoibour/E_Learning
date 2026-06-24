@@ -1,10 +1,10 @@
-# FormationHub - Plateforme de Formation Digitale
+# ToumaiHub - Plateforme de Formation Digitale
 
 Plateforme web et mobile de formation digitale inspirée de GOMYCODE, avec des parcours en design, data, développement web, marketing digital et IA, en mode en ligne ou hybride.
 
 ## 📋 Vue d'ensemble
 
-FormationHub est une plateforme complète de formation digitale qui permet à des apprenants de:
+ToumaiHub est une plateforme complète de formation digitale qui permet à des apprenants de:
 - Découvrir et explorer des programmes de formation
 - S'inscrire à des formations
 - Suivre des cours en ligne
@@ -114,7 +114,7 @@ Documentation Swagger: `http://localhost:8080/api/swagger-ui.html`
 ### Frontend (.env.local)
 ```env
 VITE_API_URL=http://localhost:8080/api
-VITE_APP_NAME=FormationHub
+VITE_APP_NAME=ToumaiHub
 VITE_APP_VERSION=1.0.0
 ```
 
@@ -295,7 +295,7 @@ Créez une issue avec:
 ## 📧 Contact
 
 Pour toute question ou suggestion:
-- Email: support@formationhub.com
+- Email: support@toumaihub.com
 - Issues: Utilisez GitHub Issues
 
 ## 📄 License

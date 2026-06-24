@@ -1,0 +1,70 @@
+/* ===== SESSION PAGE ===== */
+.sessionPage { padding: 24px; }
+
+.sessionPage__header {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  flex-wrap: wrap; gap: 16px; margin-bottom: 24px;
+}
+.sessionPage__header h2 { font-size: 1.5rem; font-weight: 700; color: #1e293b; margin-bottom: 4px; }
+.sessionPage__header p { color: #64748b; font-size: 0.9rem; }
+.sessionPage__headerActions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.sessionPage__search, .sessionPage__select {
+  padding: 8px 14px; border: 1px solid #e2e8f0; border-radius: 8px;
+  font-size: 0.9rem; outline: none; background: white; color: #1e293b;
+}
+.sessionPage__search:focus, .sessionPage__select:focus { border-color: #6366f1; box-shadow: 0 0 0 3px rgba(99,102,241,.1); }
+.sessionPage__search { width: 220px; }
+
+/* Stats */
+.sessionStats { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 24px; }
+.sessionStatCard {
+  flex: 1; min-width: 120px; padding: 16px 20px;
+  border-radius: 12px; display: flex; flex-direction: column; gap: 4px;
+  background: white; border: 1px solid #f1f5f9;
+  box-shadow: 0 1px 4px rgba(0,0,0,.05);
+}
+.sessionStatCard span { font-size: 0.78rem; color: #64748b; font-weight: 500; text-transform: uppercase; letter-spacing: .5px; }
+.sessionStatCard strong { font-size: 1.8rem; font-weight: 700; }
+.sessionStatCard--blue strong { color: #3b82f6; }
+.sessionStatCard--green strong { color: #10b981; }
+.sessionStatCard--orange strong { color: #f59e0b; }
+.sessionStatCard--gray strong { color: #6b7280; }
+.sessionStatCard--purple strong { color: #8b5cf6; }
+
+/* Grid of session cards */
+.sessionPage__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+
+.sessionCard {
+  background: white; border-radius: 16px; padding: 20px;
+  border: 1px solid #f1f5f9; box-shadow: 0 2px 8px rgba(0,0,0,.06);
+  display: flex; flex-direction: column; gap: 10px;
+  transition: transform .2s, box-shadow .2s;
+}
+.sessionCard:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.1); }
+
+.sessionCard__top { display: flex; justify-content: space-between; align-items: center; }
+.sessionCard__badge {
+  padding: 3px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600;
+}
+.badge--green { background: #dcfce7; color: #16a34a; }
+.badge--orange { background: #fef3c7; color: #d97706; }
+.badge--blue { background: #dbeafe; color: #2563eb; }
+.badge--gray { background: #f3f4f6; color: #6b7280; }
+
+.sessionCard__actions { display: flex; gap: 6px; }
+.iconBtn { background: none; border: none; cursor: pointer; font-size: 1rem; padding: 4px 6px; border-radius: 6px; transition: background .15s; }
+.iconBtn:hover { background: #f1f5f9; }
+
+.sessionCard__title { font-size: 1rem; font-weight: 700; color: #1e293b; }
+.sessionCard__formation, .sessionCard__instructor { font-size: 0.85rem; color: #64748b; }
+.sessionCard__dates { display: flex; gap: 6px; font-size: 0.8rem; color: #94a3b8; align-items: center; }
+
+.sessionCard__progress { margin-top: 4px; }
+.progressLabel { display: flex; justify-content: space-between; font-size: 0.78rem; color: #64748b; margin-bottom: 4px; }
+.progressBar { height: 6px; background: #f1f5f9; border-radius: 99px; overflow: hidden; }
+.progressFill { height: 100%; border-radius: 99px; transition: width .4s ease; }
+
+.sessionCard__statusRow { margin-top: 4px; }
+
+/* Modal Row */
+.modalRow { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }

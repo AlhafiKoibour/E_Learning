@@ -55,7 +55,7 @@ export const Home = () => {
       {/* Features Section */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-12">Pourquoi FormationHub ?</h2>
+          <h2 className="text-4xl font-bold text-center mb-12">Pourquoi ToumaiHub ?</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {features.map((feature, index) => (
               <div key={index} className="bg-white p-6 rounded-lg shadow-md text-center">

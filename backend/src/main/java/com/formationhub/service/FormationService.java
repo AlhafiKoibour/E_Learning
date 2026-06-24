@@ -5,8 +5,10 @@ import com.formationhub.dto.LessonDTO;
 import com.formationhub.dto.ModuleDTO;
 import com.formationhub.entity.Formation;
 import com.formationhub.entity.Module;
+import com.formationhub.entity.Lesson;
 import com.formationhub.exception.ResourceNotFoundException;
 import com.formationhub.repository.FormationRepository;
+import com.formationhub.repository.ModuleRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
@@ -28,6 +30,7 @@ import java.util.stream.Collectors;
 public class FormationService {
 
     private final FormationRepository formationRepository;
+    private final ModuleRepository moduleRepository;
 
     @Transactional(readOnly = true)
     @Cacheable("formations")
@@ -135,7 +138,7 @@ public class FormationService {
                 .prerequisites(splitList(formation.getPrerequisites()))
                 .includes(splitList(formation.getIncludes()))
                 .whatYouWillLearn(formation.getWhatYouWillLearn())
-                .modules(formation.getModules() != null ? formation.getModules().stream()
+                .modules(moduleRepository != null ? moduleRepository.findByFormationIdOrderByOrderIndex(formation.getId()).stream()
                         .map(this::mapModuleToDTO)
                         .collect(Collectors.toList()) : Collections.emptyList())
                 .build();
@@ -171,7 +174,21 @@ public class FormationService {
                 .durationHours(module.getDurationHours())
                 .formationId(module.getFormation() != null ? module.getFormation().getId() : null)
                 .createdAt(module.getCreatedAt())
-                .lessons(Collections.emptyList())
+                .lessons(module.getLessons() != null ? module.getLessons().stream()
+                        .map(this::mapLessonToDTO)
+                        .collect(Collectors.toList()) : Collections.emptyList())
+                .build();
+    }
+
+    private LessonDTO mapLessonToDTO(Lesson lesson) {
+        return LessonDTO.builder()
+                .id(lesson.getId())
+                .title(lesson.getTitle())
+                .description(lesson.getDescription())
+                .videoUrl(lesson.getVideoUrl())
+                .duration(lesson.getDurationMinutes())
+                .orderIndex(lesson.getOrderIndex())
+                .completed(false)
                 .build();
     }
 

@@ -1,29 +1,24 @@
 import { Outlet } from "react-router-dom";
+import { useState } from "react";
 import Sidebar from "./Sidebar";
 import Topbar from "./Topbar";
-import StatCard from "./StatCard";
-import RevenueChartCard from "./RevenueChartCard";
-import WeeklySalesCard from "./WeeklySalesCard";
-import MobileDesktopCard from "./MobileDesktopCard";
-import TasksTable from "./TasksTable";
 import FooterPage from "./FooterPage";
 import "./dashboardLayout.css";
 
-
 export const DashboardLayout = () => {
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+
   return (
-    <div className="dashboard">
-      <Sidebar />
+    <div className={`dashboard ${sidebarOpen ? "" : "dashboard--collapsed"}`}>
+      <Sidebar collapsed={!sidebarOpen} />
 
       <div className="dashboard__main">
-        <Topbar />
+        <Topbar onToggleSidebar={() => setSidebarOpen((prev) => !prev)} />
 
         <main className="dashboard__content">
           <Outlet />
         </main>
-
-        
       </div>
     </div>
   );
-}
+};

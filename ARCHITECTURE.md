@@ -1,8 +1,8 @@
-# Architecture FormationHub
+# Architecture ToumaiHub
 
 ## 🏛️ Vue d'ensemble Architecturale
 
-FormationHub suit une architecture **modulaire en trois couches** pour le backend et une architecture **component-based** pour le frontend.
+ToumaiHub suit une architecture **modulaire en trois couches** pour le backend et une architecture **component-based** pour le frontend.
 
 ```
 ┌─────────────────────────────────────────────────┐

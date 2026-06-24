@@ -70,7 +70,7 @@ public class AuthService {
                 .phone(request.getPhone())
                 .role(User.UserRole.LEARNER)
                 .isActive(true)
-                .isVerified(false)
+            .isVerified(true)
                 .build();
 
         user = userRepository.save(user);

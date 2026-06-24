@@ -88,6 +88,7 @@ export const Formations = () => {
                 <option value="data">Data</option>
                 <option value="marketing">Marketing</option>
                 <option value="ia">Intelligence Artificielle</option>
+                <option value="bureautique">Bureautique</option>
               </select>
             </div>
 

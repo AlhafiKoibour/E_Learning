@@ -6,7 +6,7 @@ export const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <h3 className="font-bold text-lg mb-4">FormationHub</h3>
+            <h3 className="font-bold text-lg mb-4">ToumaiHub</h3>
             <p className="text-gray-400 text-sm">
               La plateforme leader de formation digitale en ligne et hybride.
             </p>
@@ -52,7 +52,7 @@ export const Footer = () => {
         </div>
 
         <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400 text-sm">
-          <p>&copy; 2026 FormationHub. Tous droits réservés.</p>
+          <p>&copy; 2026 ToumaiHub. Tous droits réservés.</p>
         </div>
       </div>
     </footer>

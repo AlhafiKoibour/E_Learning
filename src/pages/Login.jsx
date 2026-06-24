@@ -63,7 +63,7 @@ export const Login = () => {
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4">
       <div className="w-full max-w-md">
         <div className="bg-white rounded-lg shadow-lg p-8">
-          <h1 className="text-3xl font-bold text-center mb-2">FormationHub</h1>
+          <h1 className="text-3xl font-bold text-center mb-2">ToumaiHub</h1>
           <p className="text-center text-gray-600 mb-8">Connexion à votre compte</p>
 
           <form onSubmit={handleSubmit} className="space-y-6">
