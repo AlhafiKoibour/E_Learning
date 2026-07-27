@@ -30,6 +30,8 @@ export const enrollmentService = {
     apiClient.delete(`/enrollments/${enrollmentId}`),
   getCohorte: (enrollmentId) =>
     apiClient.get(`/enrollments/${enrollmentId}/cohorte`),
+  updateProgress: (enrollmentId, progress) =>
+    apiClient.put(`/enrollments/${enrollmentId}/progress`, null, { params: { progress } }),
 }
 
 export const paymentService = {

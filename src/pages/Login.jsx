@@ -47,10 +47,16 @@ export const Login = () => {
     setIsLoading(true)
     try {
       const response = await authService.login(formData.email, formData.password)
+      const user = response.data?.user
       setToken(response.data.token)
-      setUser(response.data.user)
+      setUser(user)
       toast.success('Connexion réussie!')
-      navigate('/dashboardLayout')
+      
+      if (user?.role === 'ADMIN') {
+        navigate('/dashboardLayout')
+      } else {
+        navigate('/dashboard')
+      }
     } catch (error) {
       console.error('Erreur connexion:', error)
       toast.error(getApiErrorMessage(error) || 'Erreur de connexion')

@@ -26,6 +26,7 @@ export const formationService = {
 }
 
 export const moduleService = {
+  getAll: () => apiClient.get('/modules'),
   getByFormation: (formationId) =>
     apiClient.get(`/formations/${formationId}/modules`),
   getById: (id) => apiClient.get(`/modules/${id}`),
@@ -35,6 +36,7 @@ export const moduleService = {
 }
 
 export const lessonService = {
+  getAll: () => apiClient.get('/lessons'),
   getByModule: (moduleId) => apiClient.get(`/modules/${moduleId}/lessons`),
   getById: (id) => apiClient.get(`/lessons/${id}`),
   create: (data) => apiClient.post('/lessons', data),
